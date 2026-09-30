@@ -1,0 +1,21 @@
+name: session13-microservices
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: identity-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: identity_db
+      POSTGRES_USER: session13
+      POSTGRES_PASSWORD: session13
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U session13 -d identity_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10

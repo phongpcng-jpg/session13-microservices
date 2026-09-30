@@ -6,9 +6,16 @@ spring:
       server:
         webflux:
           routes:
+            - id: identity-service
+              uri: lb://identity-service
+              predicates:
+                - Path=/api/v1/auth/**
 
 server:
     port: 8080
+
+jwt:
+  secret-key: daylachuoimahoabimatrikkei0987654321dacbietracroi
 
 eureka:
   client:
